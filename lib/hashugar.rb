@@ -13,10 +13,15 @@ class Hashugar
 
   def method_missing(method, *args, &block)
     method = method.to_s
-    if method.chomp!('=')
-      @table[method] = args.first
+    if @table.key?(method.gsub('=', ''))
+      if method.chomp!('=')
+        @table[method] = args.first
+      else
+        @table[method]
+      end
     else
-      @table[method]
+      # Allows Hash methods (like stringify_keys) to still work
+      to_hash.send(method, args)
     end
   end
 
