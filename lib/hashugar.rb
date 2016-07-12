@@ -25,6 +25,10 @@ class Hashugar
     end
   end
 
+  def respond_to_missing?(method_name, include_private)
+     Hash.new.respond_to?(method_name) || super(method_name, include_private)
+   end
+
   def [](key)
     @table[stringify(key)]
   end
