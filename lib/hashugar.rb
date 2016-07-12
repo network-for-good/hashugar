@@ -21,7 +21,7 @@ class Hashugar
       end
     else
       # Allows Hash methods (like stringify_keys) to still work
-      to_hash.send(method, args)
+      to_hash.send(method, *args, &block)
     end
   end
 
